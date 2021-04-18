@@ -1,0 +1,7 @@
+@media (min-width: 1000px) {
+    .timetable-container {
+        width: 65%;
+        margin-right: auto;
+        margin-left: auto;
+    }
+  }

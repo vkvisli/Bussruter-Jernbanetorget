@@ -3,7 +3,7 @@
     color: white;
     display: flex;
     flex-direction: row;
-    box-shadow: 0 0 5px 4px rgb(128, 128, 128);;
+    box-shadow: 0 0 5px 4px rgb(128, 128, 128);
 }
 
 .top-bar-logo {

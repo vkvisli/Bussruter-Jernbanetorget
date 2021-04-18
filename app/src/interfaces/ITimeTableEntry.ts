@@ -1,7 +1,7 @@
 interface ITimeTableEntry {
-    date: Date;
-    aimedArrivalTime: Date;
-    expectedArrivalTime: Date;
+    date: string;
+    aimedArrivalTime: string;
+    expectedArrivalTime: string;
     realtime: boolean;
     destinationDisplay: {
         frontText: string;

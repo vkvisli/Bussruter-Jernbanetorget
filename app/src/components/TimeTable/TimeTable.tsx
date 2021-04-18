@@ -1,16 +1,55 @@
 import React from 'react';
+import ITimeTable from '../../interfaces/ITimeTable';
 import TimeTableDataService from '../../services/TimeTableDataService';
+import TimeTableEntry from '../TimeTableEntry/TimeTableEntry';
+import { v4 as uuidv4 } from 'uuid';
 import './TimeTable.css';
 
-class TimeTable extends React.Component {
+type TimeTableProps = {
+  
+}
 
-  constructor(props: object) {
+type TimeTableState = {
+  timeTable: ITimeTable
+}
+
+class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
+
+  private timeTableDataService: TimeTableDataService;
+
+  constructor(props: TimeTableProps) {
     super(props);
-    let timeTableData = TimeTableDataService.getTimeTableData();
+
+    this.timeTableDataService = new TimeTableDataService();
+
+    this.state = {
+      timeTable: null
+    };
+  }
+
+  componentDidMount() {
+    this.retrieveTimeTable();
+  }
+
+  private retrieveTimeTable() {
+    this.timeTableDataService.getTimeTableData().then((timeTable) => {
+      console.log("timetable retrieved:", timeTable);
+      this.setState({ timeTable: timeTable });
+    })
   }
 
   render() {
-    return <h1>Timetable</h1>
+    
+    if (!this.state.timeTable)
+      return <span>No timetable available</span>;
+
+    return (
+      <div className="timetable-container">
+        {this.state.timeTable.stopPlace.estimatedCalls.map((entry) =>
+          <TimeTableEntry entry={entry} key={uuidv4()} />
+        )}
+      </div>
+    );
   }
 }
 
