@@ -1,0 +1,57 @@
+.timetable-entry-container {
+    border-radius: 6px;
+    padding: 10px;
+    margin: 20px;
+    box-shadow: 0 0 3px rgb(128, 128, 128);
+}
+
+.timetable-entry-container:hover {
+    cursor: pointer;
+    box-shadow: 0 0 6px rgb(128, 128, 128);
+}
+
+.timetable-entry-main-content {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.timetable-entry-name {
+    flex-grow: 1;
+    font-weight: bold;
+    font-size: 1.5em;
+}
+
+.timetable-entry-arrival-time {
+    margin-right: 30px;
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+}
+
+.timetable-entry-expected-arrival-time {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.timetable-entry-aimed-arrival-time {
+    text-decoration: line-through;
+    color: gray;
+    font-size: 0.9em;
+}
+
+.timetable-entry-date {
+    text-align: right;
+    font-size: 0.9em;
+    color: gray;
+}
+
+.timetable-entry-collapse-content {
+    padding-top: 30px;
+    display: flex;
+    flex-direction: column;
+}
+
+.timetable-entry-collapse-icon {
+    text-align: center;
+    opacity: 0.3;
+}
