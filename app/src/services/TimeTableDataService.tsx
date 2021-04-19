@@ -31,7 +31,11 @@ class TimeTableDataService {
                 })
             })
             .then(res => res.json())
-            .then(res => { resolve(res.data) });
+            .then(res => { resolve(res.data) })
+            .catch((e) => {
+                console.error("Could not retrieve timetable data", e);
+                reject(e);
+            });
 
         });
     }

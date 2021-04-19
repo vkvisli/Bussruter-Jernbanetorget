@@ -10,7 +10,8 @@ type TimeTableProps = {
 }
 
 type TimeTableState = {
-  timeTable: ITimeTable
+  timeTable: ITimeTable,
+  isLoading: boolean
 }
 
 class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
@@ -23,7 +24,8 @@ class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
     this.timeTableDataService = new TimeTableDataService();
 
     this.state = {
-      timeTable: null
+      timeTable: null,
+      isLoading: false
     };
   }
 
@@ -31,14 +33,29 @@ class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
     this.retrieveTimeTable();
   }
 
+  /** 
+   * Retrieves timetable data from the timeTableDataService 
+   * and sets the component's isLoading property to true while doing so.
+   */
   private retrieveTimeTable() {
-    this.timeTableDataService.getTimeTableData().then((timeTable) => {
-      console.log("timetable retrieved:", timeTable);
-      this.setState({ timeTable: timeTable });
-    })
+    this.setState({ isLoading: true });
+
+    this.timeTableDataService.getTimeTableData()
+      .then((timeTable) => {
+        this.setState({ timeTable: timeTable });
+      })
+      .catch((e) => {
+        alert("Timetable data could not be retrieved");
+      })
+      .finally(() => {
+        this.setState({ isLoading: false });
+      })
   }
 
   render() {
+
+    if (this.state.isLoading)
+      return <span>Retrieving timetable data...</span>;
     
     if (!this.state.timeTable)
       return <span>No timetable available</span>;
