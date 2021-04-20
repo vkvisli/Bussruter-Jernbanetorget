@@ -4,4 +4,11 @@
         margin-right: auto;
         margin-left: auto;
     }
-  }
+}
+
+.timetable-refresh {
+    font-size: 26px;
+    text-align: right;
+    margin: 18px;
+    cursor: pointer;
+}

@@ -10,8 +10,7 @@ type TimeTableProps = {
 }
 
 type TimeTableState = {
-  timeTable: ITimeTable,
-  isLoading: boolean
+  timeTable: ITimeTable
 }
 
 class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
@@ -24,8 +23,7 @@ class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
     this.timeTableDataService = new TimeTableDataService();
 
     this.state = {
-      timeTable: null,
-      isLoading: false
+      timeTable: null
     };
   }
 
@@ -34,34 +32,26 @@ class TimeTable extends React.Component<TimeTableProps, TimeTableState> {
   }
 
   /** 
-   * Retrieves timetable data from the timeTableDataService 
-   * and sets the component's isLoading property to true while doing so.
+   * Retrieves timetable data from the timeTableDataService
    */
-  private retrieveTimeTable() {
-    this.setState({ isLoading: true });
-
-    this.timeTableDataService.getTimeTableData()
-      .then((timeTable) => {
+  private retrieveTimeTable = () => {
+    this.timeTableDataService.getTimeTableData(
+      (timeTable) => {
         this.setState({ timeTable: timeTable });
-      })
-      .catch((e) => {
+      },
+      (error) => {
         alert("Timetable data could not be retrieved");
-      })
-      .finally(() => {
-        this.setState({ isLoading: false });
-      })
+      });
   }
 
   render() {
-
-    if (this.state.isLoading)
-      return <span>Retrieving timetable data...</span>;
     
     if (!this.state.timeTable)
       return <span>No timetable available</span>;
 
     return (
       <div className="timetable-container">
+        <div className="timetable-refresh" onClick={this.retrieveTimeTable}>🔄</div>
         {this.state.timeTable.stopPlace.estimatedCalls.map((entry) =>
           <TimeTableEntry entry={entry} key={uuidv4()} />
         )}
