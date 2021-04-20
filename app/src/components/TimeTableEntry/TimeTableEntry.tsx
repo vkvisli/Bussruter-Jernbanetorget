@@ -88,8 +88,10 @@ class TimeTableEntry extends React.Component<TimeTableEntryProps, TimeTableEntry
 
         <Collapse isOpened={this.state.isCollapseOpen}>
           <div className="timetable-entry-collapse-content">
-            <span>Scheduled arrival time: {this.props.entry.aimedArrivalTime}</span>
-            <span>Expected arrival time: {this.props.entry.expectedArrivalTime}</span>
+            <p>
+              This bus was scheduled to arrive {this.formatArrivalTime(this.props.entry.aimedArrivalTime)}
+              &nbsp;and is expected to arrive {this.formatArrivalTime(this.props.entry.expectedArrivalTime)}
+            </p>
           </div>
         </Collapse>
 
